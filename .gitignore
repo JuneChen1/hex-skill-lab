@@ -1,4 +1,5 @@
 .DS_Store
+Thumbs.db
 .env
 .env.*
 *.log
@@ -8,4 +9,5 @@ tmp/
 token.json
 credentials.json
 *.secret.json
+.claude/settings.local.json
 
