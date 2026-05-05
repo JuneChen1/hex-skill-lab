@@ -10,4 +10,5 @@ token.json
 credentials.json
 *.secret.json
 .claude/settings.local.json
-
+.mcp.json
+Inbody/
