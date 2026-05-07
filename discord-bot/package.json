@@ -1,0 +1,14 @@
+{
+  "name": "skills-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for hex-skill-lab skills",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7"
+  }
+}
