@@ -64,9 +64,17 @@ python auto_script/generate_inbody_excel.py --move
 
 > 資料夾路徑統一由 `auto_script/generate_inbody_excel.py` 管理，腳本也會自動建立 `要新增的數據/` 與 `已處理/` 若不存在。
 
-**Step 6 — 輸出 6 個月變化摘要**
+**Step 6 — 輸出 1 個月與 6 個月變化摘要**
 
-從更新後的資料中：
+從更新後的資料中分別計算兩段變化：
+
+**1 個月變化：**
+1. 以 `history[]` 排序找出最新日期與最接近 1 個月前的日期（±10 天內）；若無則標注「無足夠資料」
+2. 骨骼肌重、體脂肪率 從 `history[]` 取值
+3. 身體總水量 從 `records[]` 依日期比對取值（若該日期無 record 則填 —）
+4. 計算並輸出變化（正數加 +，負數保留 -）
+
+**6 個月變化：**
 1. 以 `history[]` 排序找出最新日期與最接近 6 個月前的日期（±15 天內）；若無則取最舊一筆並標注實際間距
 2. 骨骼肌重、體脂肪率 從 `history[]` 取值
 3. 身體總水量 從 `records[]` 依日期比對取值（若該日期無 record 則填 —）
@@ -83,6 +91,11 @@ python auto_script/generate_inbody_excel.py --move
 - Excel 已更新：Inbody/InBody_數據報表.xlsx
 - 圖片已移至：Inbody/已處理/
 
+📊 1 個月變化（YYYY/MM/DD → YYYY/MM/DD）
+  骨骼肌重：X.X kg → X.X kg（±X.X kg）
+  體脂肪率：X.X% → X.X%（±X.X%）
+  身體總水量：X.X L → X.X L（±X.X L）
+
 📊 6 個月變化（YYYY/MM/DD → YYYY/MM/DD）
   骨骼肌重：X.X kg → X.X kg（±X.X kg）
   體脂肪率：X.X% → X.X%（±X.X%）
@@ -94,4 +107,4 @@ python auto_script/generate_inbody_excel.py --move
 - 若欄位在圖片中看不清楚，填 null 並在回報中標注「請人工確認」
 - 不修改 `profile` 欄位（id, height_cm, age, gender）
 - 不刪除任何現有記錄
-- 使用者說「數據變化」、「inbody變化」、「身體變化」時，直接讀取 `Inbody/inbody_data.json` 並輸出 6 個月變化摘要，不需要其他步驟
+- 使用者說「數據變化」、「inbody變化」、「身體變化」時，直接讀取 `Inbody/inbody_data.json` 並輸出 1 個月與 6 個月變化摘要，不需要其他步驟
