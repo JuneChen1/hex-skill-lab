@@ -2,9 +2,9 @@
   "name": "skills-discord-bot",
   "version": "1.0.0",
   "description": "Discord bot for hex-skill-lab skills",
-  "main": "index.js",
+  "main": "discord-bot/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node discord-bot/index.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",

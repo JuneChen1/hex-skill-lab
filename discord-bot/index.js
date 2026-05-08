@@ -185,10 +185,17 @@ client.once('ready', async () => {
   console.log(`Bot 已上線：${client.user.tag}`);
   console.log(`已註冊指令：${Object.keys(SKILLS).join(', ')}, chat, reset, remind, reminders`);
 
-  // 載入並排程所有已存在的提醒
+  // 載入並排程所有已存在的提醒，過期的直接刪除
   const reminders = loadReminders();
-  reminders.forEach(scheduleReminder);
-  console.log(`已排程 ${reminders.length} 個提醒`);
+  const now = Date.now();
+  const expired = reminders.filter(r => r.remindAt <= now);
+  const valid = reminders.filter(r => r.remindAt > now);
+  if (expired.length > 0) {
+    saveReminders(valid);
+    console.log(`已刪除 ${expired.length} 個過期提醒：${expired.map(r => r.message).join(', ')}`);
+  }
+  valid.forEach(scheduleReminder);
+  console.log(`已排程 ${valid.length} 個提醒`);
 });
 
 client.on('interactionCreate', async (interaction) => {
